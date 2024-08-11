@@ -33,14 +33,18 @@ function mapdown(options = {}) {
     
     function getLatLong(element) {
         const text = element.innerText;
-        const regex = /(-?\d{1,3}\.?\d*)\s*,\s*(-?\d{1,3}\.?\d*)/;
+        const regex = /^(-?\d{1,3}\.?\d*)\s*,\s*(-?\d{1,3}\.?\d*)(?: - (.*))?$/;
         const res = regex.exec(text);
         if (!res) {
             return undefined;
         }
         const lat = Number.parseFloat(res[1]);
         const long = Number.parseFloat(res[2]);
-        return [lat, long];
+        const comment = res[3];
+        return {
+            latlong: [lat, long],
+            comment,
+        };
     }
 
     function convertListToMap({ element, latLongs }) {
@@ -56,13 +60,18 @@ function mapdown(options = {}) {
         }).addTo(map);
         if (latLongs.length === 1) {
             // marker
-            L.marker(latLongs[0]).addTo(map);
+            L.marker(latLongs[0].latlong).addTo(map);
             map.setView(latLongs[0], 11);
         } else {
             // track
-            const polyline = L.polyline(latLongs, {color: "red"}).addTo(map);
+            const polyline = L.polyline(latLongs.map(latLong => latLong.latlong), {color: "red"}).addTo(map);
             map.fitBounds(polyline.getBounds());
         }
+        latLongs
+            .filter(latLong => latLong.comment)
+            .forEach(latLong => {
+                map.openPopup(latLong.comment, latLong.latlong);
+            });
     }
 
     process();
