@@ -72,8 +72,8 @@ function mapdown(options = {}) {
             .forEach(latLong => {
                 L.marker(latLong.latlong)
                     .addTo(map)
-                    .bindPopup(latLong.comment)
-                    .openPopup();
+                    .bindTooltip(latLong.comment)
+                    .openTooltip();
             });
     }
 
