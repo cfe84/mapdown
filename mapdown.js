@@ -70,7 +70,10 @@ function mapdown(options = {}) {
         latLongs
             .filter(latLong => latLong.comment)
             .forEach(latLong => {
-                map.openPopup(latLong.comment, latLong.latlong);
+                L.marker(latLong.latlong)
+                    .addTo(map)
+                    .bindPopup(latLong.comment)
+                    .openPopup();
             });
     }
 
