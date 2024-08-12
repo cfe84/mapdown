@@ -1,7 +1,8 @@
 Mapdown is a drop-in library that converts a list of coordinates to a map, using [Leaflet](https://leafletjs.com) and [OpenStreetMap](https://www.openstreetmap.org). It is primarily targetting markdown generated HTML, but can be used for any HTML document.
 
-# Usage
+Checkout the [demo](https://cfe84.github.io/mapdown/demo.html)
 
+# Usage
 
 Write some coordinates in your markdown, then convert to HTML using whatever means necessary. You can add a popup on a specific node using ` - whatever comment you want`.
 
