@@ -61,7 +61,7 @@ function mapdown(options = {}) {
         if (latLongs.length === 1) {
             // marker
             L.marker(latLongs[0].latlong).addTo(map);
-            map.setView(latLongs[0], 11);
+            map.setView(latLongs[0].latlong, 11);
         } else {
             // track
             const polyline = L.polyline(latLongs.map(latLong => latLong.latlong), {color: "red"}).addTo(map);
