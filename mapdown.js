@@ -66,6 +66,7 @@ function mapdown(options = {}) {
             // track
             const polyline = L.polyline(latLongs.map(latLong => latLong.latlong), {color: "red"}).addTo(map);
             map.fitBounds(polyline.getBounds());
+            map.zoomOut(1);
         }
         latLongs
             .filter(latLong => latLong.comment)
