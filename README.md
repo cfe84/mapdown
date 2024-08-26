@@ -11,6 +11,16 @@ Write some coordinates in your markdown, then convert to HTML using whatever mea
 - 49.4341, -123.4745 - A comment on that point.
 ```
 
+You can also add a GPX trace by adding a link to it in a list:
+
+```md
+- [](./something.gpx)
+```
+
+_Note: if there's anything in the list that is not a GPX trace or a set of coordinate, mapdown will leave it alone_.
+
+_Note 2: GPX support is partial at the moment. It's picking all points from all traces and linking them together. You can add a popup by adding one of the following elements to the point where you want it to appear: `<name>`, `<desc>`, or `cmt`._
+
 Include leaflet's CSS and Javascript references to your page.
 
 ```html
