@@ -51,7 +51,7 @@ function mapdown(options = {}) {
 
     async function getGpxLatLongsAsync(element) {
         const src = element.href;
-        if (!src || !src.toLowerCase().indexOf(".gpx") < 0) {
+        if (!src || src.toLowerCase().indexOf(".gpx") < 0) {
             return undefined;
         }
         const content = await fetchXmlAsync(src);
