@@ -51,6 +51,7 @@ function mapdown(options = {}) {
 
     async function getGpxLatLongsAsync(element) {
         const src = element.href;
+        const innerHTML = element.innerHTML;
         if (!src || src.toLowerCase().indexOf(".gpx") < 0) {
             return undefined;
         }
@@ -73,6 +74,10 @@ function mapdown(options = {}) {
                 latlong: [ trackPoint.getAttribute("lat"), trackPoint.getAttribute("lon") ]
             }
         });
+        if (latLongs.length > 0) {
+            // Disgusting, will fix when we make GPX better.
+            latLongs[0].download = { src, innerHTML };
+        }
         return latLongs;
     }
 
@@ -90,11 +95,14 @@ function mapdown(options = {}) {
 
     function convertListToMap({ element, latLongs }) {
         const div = document.createElement("div");
-        div.style.height = height;
+        const mapDiv = document.createElement("div");
+        div.appendChild(mapDiv);
+        mapDiv.style.height = height;
+        mapDiv.style.width = width;
         div.style.width = width;
-        div.className = "mapdown-map";
+        mapDiv.className = "mapdown-map";
         element.replaceWith(div);
-        const map = L.map(div);
+        const map = L.map(mapDiv);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -117,6 +125,31 @@ function mapdown(options = {}) {
                     .bindTooltip(latLong.comment)
                     .openTooltip();
             });
+        const downloadableLL = latLongs
+            .filter(latLong => latLong.download);
+        if (downloadableLL.length > 0) {
+            const ul = document.createElement("ul");
+            ul.style.listStyle = "none";
+            ul.style.display = "inline-block";
+            ul.style.padding = 0;
+            ul.style.margin = 0;
+            ul.style.width = "100%";
+            ul.style.textAlign = "center";
+            ul.className = "mapdown-ul";
+            div.appendChild(ul);
+            downloadableLL.forEach(downloadable => {
+                const item = document.createElement("li");
+                item.className = "mapdown-li";
+                const link = document.createElement("a");
+                link.className = "mapdown-a";
+                link.style.color = "#999";
+                link.style.fontStyle = "italic";
+                link.href = downloadable.download.src;
+                link.innerHTML = downloadable.download.innerHTML;
+                item.appendChild(link);
+                ul.appendChild(item);
+            });
+        }
     }
 
     processAsync().then();
