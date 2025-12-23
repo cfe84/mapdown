@@ -11,7 +11,10 @@ function mapdown(options = {}) {
         const lists = (await Promise.all([...document.getElementsByTagName("ul")]
             .map(getCoordinatesAsync)))
             .filter(coordinates => coordinates !== undefined);
-        return lists;
+        const links = (await Promise.all([...document.getElementsByTagName("a")]
+            .map(getLatLongsFromLink)))
+            .filter(coordinates => coordinates !== undefined);
+        return lists.concat(links);
     }
 
     async function getCoordinatesAsync(ul) {
@@ -29,13 +32,36 @@ function mapdown(options = {}) {
             latLongs
         };
     }
+
+    async function getLatLongsFromLink(element) {
+      try {
+        if (element.href.toLowerCase().indexOf(".gpx") < 0) {
+            return undefined;
+        }
+        if (element.parentElement.tagName === "LI") {
+            return undefined;
+        }
+        const latLongs = await getGpxLatLongsAsync(element);
+        if (!latLongs) {
+            return undefined;
+        }
+        return {
+          element,
+          latLongs,
+        };
+      } catch (err) {
+        console.error(`Error parsing lat/long from link ${element.innerHTML}: ${err}`);
+        return undefined;
+      }
+    }
     
     async function getLatLongAsync(element) {
+      try {
         if (element.children.length === 1 && element.children[0].tagName === "A") {
             return getGpxLatLongsAsync(element.children[0]);
         }
         const text = element.innerText;
-        const regex = /^(-?\d{1,3}\.?\d*)\s*,\s*(-?\d{1,3}\.?\d*)(?: - (.*))?$/;
+        const regex = /^\s*(-?\d{1,3}\.?\d*)\s*,\s*(-?\d{1,3}\.?\d*)(?: - (.*))?\s*$/;
         const res = regex.exec(text);
         if (!res) {
             return undefined;
@@ -47,9 +73,14 @@ function mapdown(options = {}) {
             latlong: [lat, long],
             comment,
         }];
+      } catch (err) {
+        console.error(`Error parsing lat/long from element ${element.innerHTML}: ${err}`);
+        return undefined;
+      }
     }
 
     async function getGpxLatLongsAsync(element) {
+      try {
         const src = element.href;
         const innerHTML = element.innerHTML;
         if (!src || src.toLowerCase().indexOf(".gpx") < 0) {
@@ -79,6 +110,10 @@ function mapdown(options = {}) {
             latLongs[0].download = { src, innerHTML };
         }
         return latLongs;
+      } catch (err) {
+        console.error(`Error parsing GPX from element ${element.innerHTML}: ${err}`);
+        return undefined;
+      }
     }
 
     async function fetchXmlAsync(src) {
