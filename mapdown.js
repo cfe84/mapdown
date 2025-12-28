@@ -160,6 +160,24 @@ function mapdown(options = {}) {
                     .bindTooltip(latLong.comment)
                     .openTooltip();
             });
+        if (latLongs.length >= 2) {
+          L.marker(latLongs[0].latlong, {
+              icon: L.icon({
+                iconUrl: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                  iconSize: [32, 32],
+                  iconAnchor: [16, 32],
+                  popupAnchor: [0, -32],
+              })
+          }).addTo(map).bindTooltip("Start");
+          L.marker(latLongs[latLongs.length - 1].latlong, {
+              icon: L.icon({
+                iconUrl: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                  iconSize: [32, 32],
+                  iconAnchor: [16, 32],
+                popupAnchor: [0, -32],
+            })
+          }).addTo(map).bindTooltip("End");
+        }
         const downloadableLL = latLongs
             .filter(latLong => latLong.download);
         if (downloadableLL.length > 0) {
