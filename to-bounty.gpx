@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<gpx version="1.1" creator="OsmAndRouterV2" xmlns="http://www.topografix.com/GPX/1/1" xmlns:osmand="https://osmand.net/docs/technical/osmand-file-formats/osmand-gpx" xmlns:gpxtpx="https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 https://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>2026-01-08-to-bounty</name>
+    <time>2026-01-08T10:38:37Z</time>
+  </metadata>
+  <trk>
+    <name>2026-01-08-to-bounty</name>
+    <trkseg>
+      <trkpt lat="-49.7054949" lon="178.8027581" />
+      <trkpt lat="-49.7113521" lon="178.8015007" />
+      <trkpt lat="-49.7164956" lon="178.7968561" />
+      <trkpt lat="-49.7208756" lon="178.785976" />
+      <trkpt lat="-49.7232066" lon="178.7671042" />
+      <trkpt lat="-49.7229577" lon="178.7544884" />
+      <trkpt lat="-49.7095533" lon="178.7103279" />
+      <trkpt lat="-49.6845239" lon="178.6830863" />
+      <trkpt lat="-49.6570769" lon="178.7047557" />
+      <trkpt lat="-49.6392381" lon="178.7434513" />
+      <trkpt lat="-49.6195878" lon="178.7939102" />
+      <trkpt lat="-49.612969" lon="178.8016492" />
+      <trkpt lat="-49.3102771" lon="178.6506348" />
+      <trkpt lat="-47.9185805" lon="179.0682108" />
+      <trkpt lat="-47.7827432" lon="179.0824543" />
+    </trkseg>
+  </trk>
+</gpx>

@@ -12,6 +12,7 @@ function mapdown(options = {}) {
             .map(getCoordinatesAsync)))
             .filter(coordinates => coordinates !== undefined);
         const links = (await Promise.all([...document.getElementsByTagName("a")]
+            .filter(elt => elt.parentElement.tagName !== "LI")
             .map(getLatLongsFromLink)))
             .filter(coordinates => coordinates !== undefined);
         return lists.concat(links);
