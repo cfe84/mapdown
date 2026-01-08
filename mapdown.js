@@ -61,7 +61,7 @@ function mapdown(options = {}) {
             return getGpxLatLongsAsync(element.children[0]);
         }
         const text = element.innerText;
-        const regex = /^\s*(-?\d{1,3}\.?\d*)\s*,\s*(-?\d{1,3}\.?\d*)(?: - (.*))?\s*$/;
+        const regex = /^\s*(-?\d{1,3}\.?\d*)\s*(?:[,\s])\s*(-?\d{1,3}\.?\d*)(?: - (.*))?\s*$/;
         const res = regex.exec(text);
         if (!res) {
             return undefined;
