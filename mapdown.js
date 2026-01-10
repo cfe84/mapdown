@@ -164,17 +164,17 @@ function mapdown(options = {}) {
         if (latLongs.length >= 2) {
           L.marker(latLongs[0].latlong, {
               icon: L.icon({
-                iconUrl: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
-                  iconSize: [32, 32],
-                  iconAnchor: [16, 32],
+                iconUrl: 'https://cfe84.github.io/mapdown/icons/start.png',
+                  iconSize: [16, 16],
+                  iconAnchor: [16, 16],
                   popupAnchor: [0, -32],
               })
           }).addTo(map).bindTooltip("Start");
           L.marker(latLongs[latLongs.length - 1].latlong, {
               icon: L.icon({
-                iconUrl: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
-                  iconSize: [32, 32],
-                  iconAnchor: [16, 32],
+                iconUrl: 'https://cfe84.github.io/mapdown/icons/finish.png',
+                  iconSize: [16, 16],
+                  iconAnchor: [0, 16],
                 popupAnchor: [0, -32],
             })
           }).addTo(map).bindTooltip("End");

@@ -44,3 +44,8 @@ You can specify pass an options object, such as `mapdown({height: "300px", width
 # Note
 
 This script is a very simple wrapper. All the hard work of rendering maps is done through OpenStreetMap and Leaflet. These are the real heroes.
+
+# Attributions
+
+- [Start icon](https://www.flaticon.com/free-icon/video_9720883?term=start&page=1&position=16&origin=search&related_id=9720883) by Tanah Basah
+- [Finish icon](https://www.flaticon.com/free-icons/start-button) by Freepik
